@@ -1,7 +1,7 @@
 # %%
 import yaml
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, simpledialog
 from importlib import resources
 import os
 
@@ -21,11 +21,28 @@ def choose_folder():
     # Destroy the hidden root window
     root.destroy()
 
-    return folder_path
+    return folder_path or ""
+
+
+def choose_folder_textbox():
+    """
+    Opens a textbox dialog for the user to paste a folder path.
+    Returns the entered path or an empty string if canceled.
+    """
+    root = tk.Tk()
+    root.withdraw()  # Hide main window
+
+    # Ask user to enter the path
+    folder_path = simpledialog.askstring(
+        "Input", "Enter the neurocog drive folder path:"
+    )
+
+    root.destroy()
+    return folder_path or ""
 
 
 def config_root_path():
-    rootdir = os.path.abspath(choose_folder())
+    rootdir = os.path.abspath(choose_folder_textbox())
 
     package_name = "neurocogdb.config"
     yaml_file_path = "config.yaml"
@@ -41,7 +58,9 @@ def config_root_path():
         print(f"Configuration root path successfully updated.")
 
     except FileNotFoundError:
-        print(f"Error: YAML file '{yaml_file_path}' not found in package '{package_name}'.")
+        print(
+            f"Error: YAML file '{yaml_file_path}' not found in package '{package_name}'."
+        )
     except yaml.YAMLError as e:
         print(f"Error parsing YAML file: {e}")
 
@@ -57,8 +76,8 @@ def confirm_root_path():
         print("Currently configured neurocog drive folder path: ", data["rootpath"])
 
     except FileNotFoundError:
-        print(f"Error: YAML file '{yaml_file_path}' not found in package '{package_name}'.")
+        print(
+            f"Error: YAML file '{yaml_file_path}' not found in package '{package_name}'."
+        )
     except yaml.YAMLError as e:
         print(f"Error parsing YAML file: {e}")
-
-

@@ -7,6 +7,7 @@ from neurocogdb.extract.finder import find_yaml_files
 
 def build_programs(config):
     yaml_files = find_yaml_files(config["rootpath"], config, "programs")
+    print(yaml_files)
 
     rows = []
     for f in yaml_files:
