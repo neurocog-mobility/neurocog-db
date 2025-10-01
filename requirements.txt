@@ -62,8 +62,6 @@ nbclient==0.10.2
 nbconvert==7.16.6
 nbformat==5.10.4
 nest-asyncio==1.6.0
-# Editable install with no version control (neurocogdb==1.0.0)
--e /home/abdulzaf/Documents/data/neurocog-lab/neurocog-dms/drive/proposed/lab_software_tools/NeuroCogDB
 notebook==7.4.5
 notebook_shim==0.2.4
 numpy==2.3.3
