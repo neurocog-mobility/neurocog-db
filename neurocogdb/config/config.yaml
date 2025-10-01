@@ -1,0 +1,24 @@
+rootpath: 
+sources:
+  data:
+    source:
+    - filename: project_info.yaml
+      location: /projects/*/
+  funding:
+    source:
+    - filename: program_info.yaml
+      location: /programs/*/
+  members:
+    source:
+    - filename: program_info.yaml
+      location: /programs/*/
+    - filename: project_info.yaml
+      location: /projects/*/
+  programs:
+    source:
+    - filename: program_info.yaml
+      location: /programs/*/
+  projects:
+    source:
+    - filename: project_info.yaml
+      location: /projects/*/

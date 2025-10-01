@@ -1,0 +1,93 @@
+programs:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: name
+    type: TEXT
+  - name: start_date
+    type: DATE
+  - name: end_date
+    type: DATE
+  - name: source_path
+    type: TEXT
+
+projects:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: name
+    type: TEXT
+  - name: ethics
+    type: INTEGER
+  - name: status
+    type: TEXT
+  - name: start_date
+    type: DATE
+  - name: end_date
+    type: DATE
+  - name: data_path
+    type: TEXT
+  - name: program_id
+    type: UUID
+  - name: source_path
+    type: TEXT
+
+data:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: category
+    type: TEXT
+  - name: modality
+    type: TEXT
+  - name: device
+    type: TEXT
+
+funding:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: organization
+    type: TEXT UNIQUE
+
+members:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: name
+    type: TEXT
+
+program_members:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: program_id
+    type: UUID
+  - name: member_id
+    type: UUID
+  - name: role
+    type: TEXT
+
+program_funding:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: program_id
+    type: UUID
+  - name: funding_id
+    type: UUID
+  - name: start_date
+    type: DATE
+  - name: end_date
+    type: DATE
+  - name: notes
+    type: TEXT
+
+project_members:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: project_id
+    type: UUID
+  - name: member_id
+    type: UUID
+
+project_data:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: project_id
+    type: UUID
+  - name: data_id
+    type: UUID

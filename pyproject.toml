@@ -1,0 +1,17 @@
+[project]
+name = "neurocogdb"
+version = "1.0.0"
+description = "Database system for the Neurocognition and Mobility Lab"
+authors = [{name="Abdullah Zafar", email="abdullah.zafar@umontreal.ca"}]
+license = { text="MIT" }
+requires-python = ">=3.8"
+
+[project.scripts]
+neurocogdb = "neurocogdb.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["neurocogdb"]
