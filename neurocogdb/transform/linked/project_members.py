@@ -2,21 +2,37 @@ import pandas as pd
 from neurocogdb.extract.parse import load_yaml
 import uuid
 from neurocogdb.extract.finder import find_yaml_files
+from neurocogdb.transform.utils import create_lookup
 
 
-def build_project_members(config, project_lookup, member_lookup):
+def build_project_members(config, project_lookup, df_members, member_lookup):
     yaml_files = find_yaml_files(config["rootpath"], config, "projects")
 
     rows = []
     for f in yaml_files:
-        data = load_yaml(f)
-        pid = project_lookup[data["project_name"]]
-        for name in data.get("members", []):
+        metadata = load_yaml(f)
+        pid = project_lookup[metadata["project_name"]]
+        for member in metadata.get("members", []):
+            # handle erroneous members
+            if not member in member_lookup.keys():
+                df = pd.DataFrame(
+                    {
+                        "id": [str(uuid.uuid4())],
+                        "name": [member],
+                        "role": ["na"],
+                        "active": [True],
+                        "valid": [False],
+                    }
+                )
+                df_members = pd.concat([df_members, df])
+                member_lookup = create_lookup(df_members)
+
             rows.append(
                 {
                     "id": str(uuid.uuid4()),
                     "project_id": pid,
-                    "member_id": member_lookup[name],
+                    "member_id": member_lookup[member],
                 }
             )
-    return pd.DataFrame(rows)
+
+    return pd.DataFrame(rows), df_members, member_lookup

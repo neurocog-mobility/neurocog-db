@@ -42,7 +42,11 @@ def choose_folder_textbox():
 
 
 def config_root_path():
-    rootdir = os.path.abspath(choose_folder_textbox())
+    dirname = choose_folder_textbox()
+    if dirname=="":
+        rootdir = None
+    else:
+        rootdir = os.path.abspath(os.path.expanduser(dirname))
 
     package_name = "neurocogdb.config"
     yaml_file_path = "config.yaml"
@@ -81,3 +85,9 @@ def confirm_root_path():
         )
     except yaml.YAMLError as e:
         print(f"Error parsing YAML file: {e}")
+
+
+def fetch_ddb_path():
+    package_name = "neurocogdb.ddb"
+    ddb_file_path = "lab_catalog.ddb"
+    return resources.files(package_name).joinpath(ddb_file_path) or ""

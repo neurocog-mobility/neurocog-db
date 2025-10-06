@@ -17,8 +17,6 @@ projects:
     type: TEXT
   - name: ethics
     type: INTEGER
-  - name: status
-    type: TEXT
   - name: start_date
     type: DATE
   - name: end_date
@@ -44,12 +42,38 @@ funding:
   - name: id
     type: UUID PRIMARY KEY
   - name: organization
-    type: TEXT UNIQUE
+    type: TEXT
 
 members:
   - name: id
     type: UUID PRIMARY KEY
   - name: name
+    type: TEXT
+  - name: role
+    type: TEXT
+  - name: active
+    type: BOOLEAN
+  - name: valid
+    type: BOOLEAN
+
+locations:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: name
+    type: TEXT
+
+outputs:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: type
+    type: TEXT
+
+collaborators:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: name
+    type: TEXT
+  - name: affiliation
     type: TEXT
 
 program_members:
@@ -59,8 +83,14 @@ program_members:
     type: UUID
   - name: member_id
     type: UUID
-  - name: role
-    type: TEXT
+
+program_collaborators:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: program_id
+    type: UUID
+  - name: collaborator_id
+    type: UUID
 
 program_funding:
   - name: id
@@ -91,3 +121,39 @@ project_data:
     type: UUID
   - name: data_id
     type: UUID
+
+project_outputs:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: project_id
+    type: UUID
+  - name: output_id
+    type: UUID
+  - name: name
+    type: TEXT
+  - name: url
+    type: TEXT
+  - name: date
+    type: DATE
+
+project_locations:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: project_id
+    type: UUID
+  - name: location_id
+    type: UUID
+
+project_participants:
+  - name: id
+    type: UUID PRIMARY KEY
+  - name: project_id
+    type: UUID
+  - name: label
+    type: TEXT
+  - name: total
+    type: INTEGER
+  - name: collected
+    type: INTEGER
+  - name: attributes
+    type: TEXT[]

@@ -1,0 +1,82 @@
+.dark-dropdown .Select-control,
+.dark-dropdown .Select-menu-outer,
+.dark-dropdown .Select-option {
+    background-color: #002044 !important;
+    color: white !important;
+}
+.dark-dropdown .Select-option.is-focused {
+    background-color: #013570 !important;
+}
+.dark-dropdown .Select-option.is-selected {
+    background-color: #0053b3 !important;
+}
+
+
+/* Change label text color */
+.status-checklist .form-check-label {
+    /* color: white; */
+    font-size: 0.9rem;
+}
+
+/* Change switch background when checked */
+.status-checklist .form-check-input:checked {
+    background-color: #003079;  /* bootstrap primary blue */
+    border-color: #0d6efd;
+}
+
+/* Dark background for the switch itself */
+.status-checklist .form-check-input {
+    background-color: #686868;
+    border-color: #555;
+}
+
+/* Dark Theme for DatePickerRange Input */
+.DateRangePickerInput {
+    background-color: #343a40; /* Darker background */
+    border: 1px solid #495057; /* Subtle border */
+    border-radius: 4px;
+}
+
+.DateInput_input {
+    background-color: #343a40 !important;
+    color: #f8f9fa !important; /* Light text color */
+    border: none !important;
+    font-size: 1rem !important;
+    height: 32px !important;
+}
+
+/* Dark Theme for Calendar Popup */
+.DayPicker {
+    background-color: #212529 !important; /* Very dark background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    border: 1px solid #495057;
+}
+
+/* Default day styles */
+.CalendarDay {
+    color: #f8f9fa !important; /* Light day text */
+    background-color: #212529 !important;
+    border: 1px solid #212529; /* Remove day border */
+}
+
+/* Hovered day style */
+.CalendarDay:not(.CalendarDay__selected):not(.CalendarDay__selected_span):hover {
+    background-color: #495057 !important;
+    color: #ffffff !important;
+    border: 1px solid #495057 !important;
+}
+
+/* Selected day and span styles */
+.CalendarDay__selected, 
+.CalendarDay__selected:active, 
+.CalendarDay__selected:hover,
+.CalendarDay__selected_span {
+    background: #007bff !important; /* Primary blue color */
+    color: #ffffff !important;
+    border: 1px solid #007bff !important;
+}
+
+/* Navigators (Prev/Next month buttons) */
+.DayPickerNavigation_button {
+    color: #f8f9fa !important;
+}

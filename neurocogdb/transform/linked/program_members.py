@@ -2,40 +2,37 @@ import pandas as pd
 from neurocogdb.extract.parse import load_yaml
 import uuid
 from neurocogdb.extract.finder import find_yaml_files
+from neurocogdb.transform.utils import create_lookup
 
 
-def build_program_members(config, program_lookup, member_lookup):
+def build_program_members(config, program_lookup, df_members, member_lookup):
     yaml_files = find_yaml_files(config["rootpath"], config, "programs")
 
     rows = []
     for f in yaml_files:
-        data = load_yaml(f)
-        pid = program_lookup[data["program_name"]]
-        for name in data.get("lead", []):
+        metadata = load_yaml(f)
+        pid = program_lookup[metadata["program_name"]]
+        for member in metadata.get("members", []):
+            # handle erroneous members
+            if not member in member_lookup.keys():
+                df = pd.DataFrame(
+                    {
+                        "id": [str(uuid.uuid4())],
+                        "name": [member],
+                        "role": ["na"],
+                        "active": [True],
+                        "valid": [False],
+                    }
+                )
+                df_members = pd.concat([df_members, df])
+                member_lookup = create_lookup(df_members)
+
             rows.append(
                 {
                     "id": str(uuid.uuid4()),
-                    "program_id": pid,
-                    "member_id": member_lookup[name],
-                    "role": "lead",
+                    "project_id": pid,
+                    "member_id": member_lookup[member],
                 }
             )
-        for name in data.get("members", []):
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "program_id": pid,
-                    "member_id": member_lookup[name],
-                    "role": "member",
-                }
-            )
-        for c in data.get("collaborators", []):
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "program_id": pid,
-                    "member_id": member_lookup[c["name"]],
-                    "role": "collaborator",
-                }
-            )
-    return pd.DataFrame(rows)
+
+    return pd.DataFrame(rows), df_members, member_lookup

@@ -1,5 +1,9 @@
-rootpath: /run/user/1000/gvfs/smb-share:server=ahsfile.uwaterloo.ca,share=neurocog$
+rootpath: null
 sources:
+  collaborators:
+    source:
+    - filename: program_info.yaml
+      location: /programs/*/
   data:
     source:
     - filename: project_info.yaml
@@ -8,10 +12,16 @@ sources:
     source:
     - filename: program_info.yaml
       location: /programs/*/
+  locations:
+    source:
+    - filename: project_info.yaml
+      location: /projects/*/
   members:
     source:
-    - filename: program_info.yaml
-      location: /programs/*/
+    - filename: member_info.yaml
+      location: /people/
+  outputs:
+    source:
     - filename: project_info.yaml
       location: /projects/*/
   programs:

@@ -4,6 +4,7 @@ from importlib.resources import files
 import sys
 from neurocogdb.load.sync import sync_ddb
 from neurocogdb.config.paths import config_root_path, confirm_root_path
+from neurocogdb.gui.app import run_app
 
 
 def get_parser():
@@ -40,14 +41,9 @@ def run_command(args):
             sync_ddb()
 
         case "gui":
-            gui_path = files("neurocogdb.ddb").joinpath("gui.py")
-            # run Streamlit on the actual file location
-            subprocess.run(
-                [sys.executable, "-m", "streamlit", "run", str(gui_path)],
-                capture_output=True,
-                text=True,  # Decodes stdout and stderr as text
-                check=True,  # Raises CalledProcessError if the command returns a non-zero exit code
-            )
+            # run_gui()
+            run_app()
+
 
         case _:
             raise ValueError(f"Unknown command: {args.command}")

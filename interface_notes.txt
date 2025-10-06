@@ -1,8 +1,61 @@
-- number of people collected / target
-- outputs
-- HQP members
-- collection locations
-	- volume of projects/collections
-- number of participants coming through the lab
-- # of funding/collections/collaborations
-- # of current projects
+- home:
+1. Home / Summary Dashboard
+- Top-row
+	- Card: Total active projects vs completed projects
+	- Bar chart: participants per active project (collected vs target)
+- Middle-row:
+	- A timeline view (Gantt-style) of project/program start/end dates
+- Bottom-row:
+	- A table of locations with active project counts
+	- A table of funding sources sorted by number of program involvements
+
+- other:
+	- easily see number of participants collected / target (+ group breakdown) for each project
+	- outputs for each project
+	- member summaries
+	- collection locations (volume of projects/collections)
+	- easily filter projects based on data sources/participant attributes
+	- always sort members by "valid" tag (valid first, invalid last) to make it easy to see where entries need to be corrected
+	
+2. Project Explorer
+
+Filter sidebar
+	Filter projects by:
+		Data sources (project_data → data.modality/device)
+		Participant attributes (project_participants.attributes)
+		Status (ongoing, completed, upcoming)
+		Program
+		Funding source
+
+		Main table or cards
+			Each project row/card:
+				Name, status, dates
+				Associated program
+				Associated funding
+				Participants: collected vs target (with group breakdown as a stacked bar)
+				Data: modality (click to expand and see specific devices)
+				Outputs: sorted by type
+				Associated members (with valid tags shown)
+
+3. Lab Directory
+	Sortable table: Members
+	Always sorted by valid DESC, active DESC
+	Columns: Name, Role, Valid, Active, #projects, #programs
+	Highlight invalid members (different color row) to help identify corrections
+	Mini profile cards on click: which projects/programs they are attached to
+	
+	Sortable table: Collaborators
+	List/table grouped by affiliation: which programs they are attached to
+
+4. Data & Outputs
+	Data catalog
+	Table: modality, device, # projects using it
+	Filter: “show me all projects using IMUs”
+
+	Outputs
+	- Table with search/filter by project, type (paper, poster, dataset, code), and URL
+	- Quick stats: total outputs this year, outputs by type
+	
+5. Explore
+	Graph/network view (collaborator ↔ programs ↔ projects)
+

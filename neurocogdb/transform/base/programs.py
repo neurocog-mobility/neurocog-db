@@ -12,15 +12,22 @@ def build_programs(config):
     rows = []
     for f in yaml_files:
         data = load_yaml(f)
-        rows.append(
-            {
-                "id": str(uuid.uuid4()),
-                "name": data["program_name"],
-                "start_date": pd.to_datetime(data["start_date"]).date(),
-                "end_date": pd.to_datetime(data["end_date"]).date(),
-                "source_path": str(f),
-            }
-        )
+        # if not template
+        if not data["program_name"] == "program name" and not data.get("start_date") == "YYYY-MM-DD":
+            if data.get("end_date") == "YYYY-MM-DD":
+                end_date = pd.to_datetime(data.get("start_date")).date() + pd.DateOffset(years=5)
+            else:
+                end_date = pd.to_datetime(data.get("end_date")).date()
+
+            rows.append(
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": data["program_name"],
+                    "start_date": pd.to_datetime(data["start_date"]).date(),
+                    "end_date": end_date,
+                    "source_path": str(f),
+                }
+            )
 
     df = pd.DataFrame(rows)
     return df, create_lookup(df)

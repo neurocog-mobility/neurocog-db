@@ -18,9 +18,19 @@ def build_data(config):
             sources.add(tuple(sorted(src.items())))
 
     dict_sources = [dict(s) for s in sources]
-    df = pd.DataFrame([{"id": str(uuid.uuid4()), **src} for src in dict_sources])
+    df = pd.DataFrame(
+        [
+            {
+                "id": str(uuid.uuid4()),
+                "category": src["category"],
+                "modality": src["modality"],
+                "device": src["device"],
+            }
+            for src in dict_sources
+        ]
+    )
     df["name"] = [
         f"{s['category']}_{s['modality']}_{s['device']}" for _, s in df.iterrows()
     ]
 
-    return df.drop('name', axis=1), create_lookup(df)
+    return df.drop("name", axis=1), create_lookup(df)
