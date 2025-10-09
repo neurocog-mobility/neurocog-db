@@ -1,7 +1,7 @@
 # gui/app.py
 import dash
 import dash_bootstrap_components as dbc
-
+import webbrowser, threading
 
 def create_app():
     # Initialize Dash with multipage support
@@ -18,7 +18,7 @@ def create_app():
             dbc.NavItem(dbc.NavLink("Projects", href="/projects")),
             dbc.NavItem(dbc.NavLink("Explore", href="/explore")),
         ],
-        brand="Lab Dashboard",
+        brand="NeuroCog Dashboard",
         color="primary",
         dark=True,
     )
@@ -35,14 +35,14 @@ def create_app():
     return app
 
 
-def run_app(host="127.0.0.1", port="8050", debug=True):
+def run_app(host="127.0.0.1", port="8050", debug=False):
     app = create_app()
 
-    # def open_browser():
-    #     webbrowser.open_new(f"http://{host}:{port}/")
+    def open_browser():
+        webbrowser.open_new(f"http://{host}:{port}/")
 
-    # # Run browser opener in background so it doesn’t block server
-    # threading.Timer(1, open_browser).start()
+    # Run browser opener in background so it doesn’t block server
+    threading.Timer(1, open_browser).start()
 
     # # Start server
     app.run(debug=debug, port=port)
