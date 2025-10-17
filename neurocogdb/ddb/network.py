@@ -144,4 +144,10 @@ def load_network_elements():
         )
 
     con.close()
+
+    # add edge ids
+    for i, e in enumerate(edges):
+        if "id" not in e["data"]:
+            e["data"]["id"] = f"edge-{e['data']['source']}-{e['data']['target']}-{i}"
+
     return nodes, edges

@@ -1,6 +1,6 @@
 [project]
 name = "neurocogdb"
-version = "1.0.2"
+version = "1.0.3"
 description = "Database system for the Neurocognition and Mobility Lab"
 authors = [{name="Abdullah Zafar", email="abdullah.zafar@umontreal.ca"}]
 license = { text="MIT" }

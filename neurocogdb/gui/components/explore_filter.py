@@ -110,6 +110,8 @@ filter_sidebar = dbc.Card(
                     inline=False,
                     className="mb-3 status-checklist",
                 ),
+                html.Br(),
+                dbc.Button("Reset Highlight", id="reset-highlight", n_clicks=0),
             ]
         ),
     ],

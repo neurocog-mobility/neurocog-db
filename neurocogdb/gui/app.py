@@ -8,6 +8,7 @@ def create_app():
     app = dash.Dash(
         __name__,
         use_pages=True,
+        suppress_callback_exceptions=True,
         external_stylesheets=[dbc.themes.SANDSTONE],
     )
 
@@ -38,11 +39,11 @@ def create_app():
 def run_app(host="127.0.0.1", port="8050", debug=False):
     app = create_app()
 
-    def open_browser():
-        webbrowser.open_new(f"http://{host}:{port}/")
+    # def open_browser():
+    #     webbrowser.open_new(f"http://{host}:{port}/")
 
-    # Run browser opener in background so it doesn’t block server
-    threading.Timer(1, open_browser).start()
+    # # Run browser opener in background so it doesn’t block server
+    # threading.Timer(1, open_browser).start()
 
     # # Start server
     app.run(debug=debug, port=port)

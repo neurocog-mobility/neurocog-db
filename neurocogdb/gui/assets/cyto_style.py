@@ -10,6 +10,22 @@ STYLESHEET = [
         },
     },
     {
+        "selector": "node.highlighted",
+        "style": {
+            "border-color": "#FFD700",
+            "border-width": 4,
+            "background-color": "#FFD700",
+            "color": "black",
+        },
+    },
+    {
+        "selector": "edge.highlighted",
+        "style": {
+            "line-color": "#FFD700",
+            "width": 3,
+        },
+    },
+    {
         "selector": '[type="program"]',
         "style": {
             "background-color": "#292929",

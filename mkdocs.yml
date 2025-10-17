@@ -1,0 +1,21 @@
+site_name: NeuroCog DB
+site_url: https://neurocog-mobility.github.io/neurocog-db/
+repo_url: https://github.com/neurocog-mobility/neurocog-db
+
+theme:
+  name: "readthedocs"
+
+nav:
+  - Home: index.md
+  - Setup:
+    - setup/install.md
+    - setup/useful-info.md
+  - Schema:
+    - schema/index.md
+    - Metadata:
+        - schema/programs.md
+        - schema/projects.md
+        - schema/members.md
+
+markdown_extensions:
+  - admonition

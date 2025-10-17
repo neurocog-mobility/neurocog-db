@@ -1,9 +1,7 @@
 from neurocogdb.gui.assets.cyto_style import STYLESHEET
 import dash_cytoscape as cyto
 import dash_bootstrap_components as dbc
-from dash import html
 from neurocogdb.gui.components import explore_filter
-
 
 def layout(elements):
     return dbc.Container(
