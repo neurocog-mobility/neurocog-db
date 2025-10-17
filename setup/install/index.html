@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://neurocog-mobility.github.io/neurocog-db/setup/install/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Installation &amp; Configuration - NeuroCog DB</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installation \u0026amp; Configuration";
+        var mkdocs_page_input_path = "setup/install.md";
+        var mkdocs_page_url = "/neurocog-db/setup/install/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> NeuroCog DB
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Setup</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Installation &amp; Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#neurocog-db">NeuroCog DB</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#upgrading-neurocog-db">Upgrading NeuroCog DB</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuring-neurocog-db">Configuring NeuroCog DB</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#syncing-and-viewing-the-data-catalog">Syncing and viewing the data catalog</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../useful-info/">Useful Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schema</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schema/">Schema</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Metadata</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/programs/">program_info.yaml</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/projects/">project_info.yaml</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../schema/members/">member_info.yaml</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">NeuroCog DB</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Setup</li>
+      <li class="breadcrumb-item active">Installation &amp; Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/neurocog-mobility/neurocog-db/edit/master/docs/setup/install.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="installation-configuration">Installation &amp; Configuration</h1>
+<h2 id="neurocog-db">NeuroCog DB</h2>
+<p>A Python 3+ installation is required to run NeuroCog DB. See Python installation instructions below if you do not have it installed on your current system.</p>
+<p>It is recommended to install NeuroCog DB in a virtual environment in order to avoid package and versioning conflicts across Python libraries. See <a href="../useful-info/#using-virtual-environments">Using virtual environments</a> for more information.</p>
+<p>To install NeuroCog DB:</p>
+<ol>
+<li><a href="../useful-info/#using-the-terminal">Open a terminal</a>  and run the installation command:</li>
+</ol>
+<pre><code>pip install git+https://github.com/neurocog-mobility/neurocog-db.git
+</code></pre>
+<ol>
+<li>Test the installation and view all available commands:</li>
+</ol>
+<pre><code>neurocogdb --help
+</code></pre>
+<h3 id="upgrading-neurocog-db">Upgrading NeuroCog DB</h3>
+<p>Once installed, to upgrade to a newer release add the <code>--upgrade</code> flag:</p>
+<pre><code>pip install --upgrade git+https://github.com/neurocog-mobility/neurocog-db.git
+</code></pre>
+<h2 id="configuring-neurocog-db">Configuring NeuroCog DB</h2>
+<p>Neurocog DB requires setting a path to the root folder of the NeuroCog drive.
+To view the currently configured path, run:</p>
+<pre><code>neurocogdb config
+</code></pre>
+<p>For a fresh installation, this should return <code>None</code>.
+To find the correct configuration path, <a href="../useful-info/#using-the-terminal">open a terminal</a> in the root folder of the NeuroCog drive on your computer.</p>
+<p>To set the path, run:</p>
+<pre><code>neurocogdb config --set
+</code></pre>
+<p>Paste the folder path in the prompt and click <em>Ok</em>. You should get confirmation of the updated path.</p>
+<h2 id="syncing-and-viewing-the-data-catalog">Syncing and viewing the data catalog</h2>
+<p>Once you have configured the root path, simply run:</p>
+<pre><code>neurocogdb sync
+</code></pre>
+<p>To update the data catalog, then run:</p>
+<pre><code>neurocogdb gui
+</code></pre>
+<p>Use <em>ctrl/command + click</em> on the URL displayed in the terminal to launch a browser-based interface to view the data catalog.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../.." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../useful-info/" class="btn btn-neutral float-right" title="Useful Information">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/neurocog-mobility/neurocog-db" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../useful-info/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
