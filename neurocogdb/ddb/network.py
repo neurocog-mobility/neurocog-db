@@ -19,9 +19,9 @@ def load_network_elements():
     funding = con.execute("SELECT id, organization FROM funding").fetchall()
 
     # Fetch relationships
-    program_members = con.execute(
-        "SELECT program_id, member_id FROM program_members"
-    ).fetchall()
+    # program_members = con.execute(
+    #     "SELECT program_id, member_id FROM program_members"
+    # ).fetchall()
     program_collabs = con.execute(
         "SELECT program_id, collaborator_id FROM program_collaborators"
     ).fetchall()
@@ -95,17 +95,17 @@ def load_network_elements():
             {"data": {"id": f"funding_{fid}", "label": label, "type": "funding"}}
         )
 
-    # Program ↔ Members
-    for prog_id, mem_id in program_members:
-        edges.append(
-            {
-                "data": {
-                    "source": f"program_{prog_id}",
-                    "target": f"member_{mem_id}",
-                    "label": "has member",
-                }
-            }
-        )
+    # # Program ↔ Members
+    # for prog_id, mem_id in program_members:
+    #     edges.append(
+    #         {
+    #             "data": {
+    #                 "source": f"program_{prog_id}",
+    #                 "target": f"member_{mem_id}",
+    #                 "label": "has member",
+    #             }
+    #         }
+    #     )
 
     # Program ↔ Collaborators
     for prog_id, collab_id in program_collabs:
@@ -136,8 +136,8 @@ def load_network_elements():
         edges.append(
             {
                 "data": {
-                    "source": f"project_{proj_id}",
-                    "target": f"member_{mem_id}",
+                    "source": f"member_{mem_id}",
+                    "target": f"project_{proj_id}",
                     "label": "works on",
                 }
             }

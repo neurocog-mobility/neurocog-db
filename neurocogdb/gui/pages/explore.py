@@ -44,14 +44,6 @@ def filter_nodes(selected_types, selected_statuses):
     return filtered_nodes + filtered_edges
 
 
-# @dash.callback(
-#     Output("network-graph", "stylesheet"),
-#     Input("network-graph", "tapNodeData"),
-# )
-# def highlight_multihop(data):
-#     if not data:
-#         return STYLESHEET
-
 @dash.callback(
     Output("network-graph", "stylesheet"),
     Input("network-graph", "tapNodeData"),
@@ -116,6 +108,7 @@ def update_highlight(data, reset_clicks, current_styles):
         highlight_styles.append({
             "selector": f'node[id = "{n_id}"]',
             "style": {
+                "color": "black",
                 "background-color": color,
                 "border-color": color,
                 "border-width": 4 - d,
