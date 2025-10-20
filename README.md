@@ -1,5 +1,7 @@
 # neurocog-db
 
+Link to full documentation: https://neurocog-mobility.github.io/neurocog-db/
+
 ## Installation
 
 Run the following from a terminal:

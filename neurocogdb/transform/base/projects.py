@@ -12,7 +12,7 @@ def build_projects(config, df_programs, program_lookup):
     for f in yaml_files:
         data = load_yaml(f)
         # if not template
-        if not data["project_name"] == "project name" and not data.get("start_date") == "YYYY-MM-DD":
+        if not data["project_name"] == "Project Name" and not data.get("start_date") == "YYYY-MM-DD":
             start_date = pd.to_datetime(data.get("start_date")).date()
             # check for valid end date
             if data.get("end_date") == "YYYY-MM-DD":

@@ -13,7 +13,7 @@ def build_programs(config):
     for f in yaml_files:
         data = load_yaml(f)
         # if not template
-        if not data["program_name"] == "program name" and not data.get("start_date") == "YYYY-MM-DD":
+        if not data["program_name"] == "Program Name" and not data.get("start_date") == "YYYY-MM-DD":
             if data.get("end_date") == "YYYY-MM-DD":
                 end_date = pd.to_datetime(data.get("start_date")).date() + pd.DateOffset(years=5)
             else:
