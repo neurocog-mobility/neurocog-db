@@ -35,7 +35,7 @@ def update_projects(
     end_date,
 ):
     # Load projects
-    df = load_projects()  # JSON arrays already parsed
+    df = load_projects()
 
     # Build filter options
     all_programs = [f["name"] for lst in df["program"] for f in lst]
@@ -44,6 +44,7 @@ def update_projects(
 
     # Funding
     all_funders = [f["organization"] for lst in df["funding"] for f in lst]
+    all_funders = [funder if funder else "NA" for funder in all_funders]
     funding_opts = sorted(set(all_funders))
 
     # Participants

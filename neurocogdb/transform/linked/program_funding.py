@@ -9,19 +9,20 @@ def build_program_funding(config, program_lookup, funding_lookup):
 
     rows = []
     for f in yaml_files:
-        data = load_yaml(f)
-        pid = program_lookup[data["program_name"]]
-        for entry in data.get("funding", []):
-            name = entry["organization"].strip().replace("_", " ")
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "program_id": pid,
-                    "funding_id": funding_lookup[name],
-                    "start_date": pd.to_datetime(entry["start_date"]).date(),
-                    "end_date": pd.to_datetime(entry["end_date"]).date(),
-                    "notes": entry["notes"],
-                }
-            )
+        metadata = load_yaml(f)
+        if not metadata.get("program_name") == "Program Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            pid = program_lookup[metadata.get("program_name")]
+            for entry in metadata.get("funding", []):
+                name = entry["organization"].strip().replace("_", " ")
+                rows.append(
+                    {
+                        "id": str(uuid.uuid4()),
+                        "program_id": pid,
+                        "funding_id": funding_lookup[name],
+                        "start_date": pd.to_datetime(entry["start_date"]).date(),
+                        "end_date": pd.to_datetime(entry["end_date"]).date(),
+                        "notes": entry["notes"],
+                    }
+                )
 
     return pd.DataFrame(rows)

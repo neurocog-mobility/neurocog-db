@@ -23,7 +23,10 @@ def get_parser():
     subparsers.add_parser("sync", help="Sync catalog.")
 
     # gui
-    subparsers.add_parser("gui", help="Launch catalog GUI.")
+    gui_parser = subparsers.add_parser("gui", help="Launch catalog GUI.")
+    gui_parser.add_argument(
+        "--debug", action="store_true", help="Run in debug mode."
+    )
 
     return parser
 
@@ -41,8 +44,7 @@ def run_command(args):
             sync_ddb()
 
         case "gui":
-            # run_gui()
-            run_app()
+            run_app(debug=args.debug)
 
 
         case _:

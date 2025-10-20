@@ -36,7 +36,7 @@ def create_app():
     return app
 
 
-def run_app(host="127.0.0.1", port="8050", debug=False):
+def run_app(host="127.0.0.1", port="8050", debug=True):
     app = create_app()
 
     # def open_browser():

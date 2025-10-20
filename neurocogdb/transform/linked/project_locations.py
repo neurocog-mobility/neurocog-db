@@ -10,14 +10,15 @@ def build_project_locations(config, project_lookup, location_lookup):
     rows = []
     for f in yaml_files:
         metadata = load_yaml(f)
-        pid = project_lookup[metadata["project_name"]]
-        for location in metadata.get("location", []):
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "project_id": pid,
-                    "location_id": location_lookup[location["name"]],
-                }
-            )
+        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            pid = project_lookup[metadata.get("project_name")]
+            for location in metadata.get("location", []):
+                rows.append(
+                    {
+                        "id": str(uuid.uuid4()),
+                        "project_id": pid,
+                        "location_id": location_lookup[location["name"]],
+                    }
+                )
 
     return pd.DataFrame(rows)

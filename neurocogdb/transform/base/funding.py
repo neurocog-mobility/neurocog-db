@@ -10,10 +10,11 @@ def build_funding(config):
 
     funding = set()
     for f in yaml_files:
-        data = load_yaml(f)
-        funding_entries = data.get("funding", [])
-        for entry in funding_entries:
-            funding.update([entry["organization"].strip().replace("_", " ")])
+        metadata = load_yaml(f)
+        if not metadata.get("program_name") == "Program Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            funding_entries = metadata.get("funding", [])
+            for entry in funding_entries:
+                funding.update([entry["organization"].strip().replace("_", " ")])
 
     df = pd.DataFrame([{"id": str(uuid.uuid4()), "organization": n} for n in funding])
     return df, create_lookup(df, lookup_column="organization")

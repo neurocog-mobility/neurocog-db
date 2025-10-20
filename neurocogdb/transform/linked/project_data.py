@@ -9,16 +9,17 @@ def build_project_data(config, project_lookup, data_lookup):
 
     rows = []
     for f in yaml_files:
-        data = load_yaml(f)
-        pid = project_lookup[data["project_name"]]
-        for entry in data.get("data_sources", []):
-            name = f"{entry['category']}_{entry['modality']}_{entry['device']}"
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "project_id": pid,
-                    "data_id": data_lookup[name],
-                }
-            )
+        metadata = load_yaml(f)
+        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            pid = project_lookup[metadata.get("project_name")]
+            for entry in metadata.get("data_sources", []):
+                name = f"{entry['category']}_{entry['modality']}_{entry['device']}"
+                rows.append(
+                    {
+                        "id": str(uuid.uuid4()),
+                        "project_id": pid,
+                        "data_id": data_lookup[name],
+                    }
+                )
 
     return pd.DataFrame(rows)

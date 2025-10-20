@@ -11,28 +11,29 @@ def build_program_members(config, program_lookup, df_members, member_lookup):
     rows = []
     for f in yaml_files:
         metadata = load_yaml(f)
-        pid = program_lookup[metadata["program_name"]]
-        for member in metadata.get("members", []):
-            # handle erroneous members
-            if not member in member_lookup.keys():
-                df = pd.DataFrame(
+        if not metadata.get("program_name") == "Program Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            pid = program_lookup[metadata.get("program_name")]
+            for member in metadata.get("members", []):
+                # handle erroneous members
+                if not member in member_lookup.keys():
+                    df = pd.DataFrame(
+                        {
+                            "id": [str(uuid.uuid4())],
+                            "name": [member],
+                            "role": ["na"],
+                            "active": [True],
+                            "valid": [False],
+                        }
+                    )
+                    df_members = pd.concat([df_members, df])
+                    member_lookup = create_lookup(df_members)
+
+                rows.append(
                     {
-                        "id": [str(uuid.uuid4())],
-                        "name": [member],
-                        "role": ["na"],
-                        "active": [True],
-                        "valid": [False],
+                        "id": str(uuid.uuid4()),
+                        "project_id": pid,
+                        "member_id": member_lookup[member],
                     }
                 )
-                df_members = pd.concat([df_members, df])
-                member_lookup = create_lookup(df_members)
-
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "project_id": pid,
-                    "member_id": member_lookup[member],
-                }
-            )
 
     return pd.DataFrame(rows), df_members, member_lookup

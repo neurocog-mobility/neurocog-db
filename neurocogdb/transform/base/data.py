@@ -10,9 +10,12 @@ def build_data(config):
 
     sources = set()
     for f in yaml_files:
-        data = load_yaml(f)
-
-        project_sources = data.get("data_sources", [])
+        metadata = load_yaml(f)
+        if (
+            not metadata.get("project_name") == "Project Name"
+            and not metadata.get("start_date") == "YYYY-MM-DD"
+        ):
+            project_sources = metadata.get("data_sources", [])
 
         for src in project_sources:
             sources.add(tuple(sorted(src.items())))

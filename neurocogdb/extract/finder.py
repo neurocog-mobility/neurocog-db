@@ -70,9 +70,8 @@ def find_yaml_files(root, config, table_name):
 
     for src in sources:
         pattern = os.path.join(root, src["location"].lstrip("/"), src["filename"])
-        #print(pattern)
         for filepath in glob.glob(pattern):
-            print(filepath)
+            print("\t", table_name, filepath)
             discovered.append(filepath)
 
     return discovered

@@ -10,8 +10,8 @@ def build_locations(config):
     set_location_names = set()
     for f in yaml_files:
         metadata = load_yaml(f)
-
-        set_location_names.update([c["name"] for c in metadata.get("location", [])])
+        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            set_location_names.update([c["name"] for c in metadata.get("location", [])])
 
     df = pd.DataFrame([{"id": str(uuid.uuid4()), "name": n} for n in set_location_names])
     return df, create_lookup(df)

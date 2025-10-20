@@ -10,14 +10,15 @@ def build_program_collaborators(config, program_lookup, collaborator_lookup):
     rows = []
     for f in yaml_files:
         metadata = load_yaml(f)
-        pid = program_lookup[metadata["program_name"]]
-        for entry in metadata.get("collaborators", []):
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "program_id": pid,
-                    "collaborator_id": collaborator_lookup[entry["name"]],
-                }
-            )
+        if not metadata.get("program_name") == "Program Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            pid = program_lookup[metadata.get("program_name")]
+            for entry in metadata.get("collaborators", []):
+                rows.append(
+                    {
+                        "id": str(uuid.uuid4()),
+                        "program_id": pid,
+                        "collaborator_id": collaborator_lookup[entry["name"]],
+                    }
+                )
 
     return pd.DataFrame(rows)

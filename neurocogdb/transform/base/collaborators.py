@@ -11,9 +11,10 @@ def build_collaborators(config):
     collaborators = set()
     for f in yaml_files:
         metadata = load_yaml(f)
-        collaborator_entries = metadata.get("collaborators", [])
-        for entry in collaborator_entries:
-            collaborators.update([frozenset(entry.items())])
+        if not metadata.get("program_name") == "Program Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            collaborator_entries = metadata.get("collaborators", [])
+            for entry in collaborator_entries:
+                collaborators.update([frozenset(entry.items())])
 
     collaborators = [dict(c) for c in collaborators]
 

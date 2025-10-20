@@ -43,30 +43,31 @@ def choose_folder_textbox():
 
 def config_root_path():
     dirname = choose_folder_textbox()
-    if dirname=="":
-        rootdir = None
-    else:
-        rootdir = os.path.abspath(os.path.expanduser(dirname))
+    if dirname:
+        if dirname=="":
+            rootdir = None
+        else:
+            rootdir = os.path.abspath(os.path.expanduser(dirname))
 
-    package_name = "neurocogdb.config"
-    yaml_file_path = "config.yaml"
+        package_name = "neurocogdb.config"
+        yaml_file_path = "config.yaml"
 
-    try:
-        with resources.files(package_name).joinpath(yaml_file_path).open("r") as f:
-            data = yaml.safe_load(f)
+        try:
+            with resources.files(package_name).joinpath(yaml_file_path).open("r") as f:
+                data = yaml.safe_load(f)
 
-        data["rootpath"] = rootdir
+            data["rootpath"] = rootdir
 
-        with resources.files(package_name).joinpath(yaml_file_path).open("w") as f:
-            yaml.dump(data, f, default_flow_style=False)
-        print(f"Configuration root path successfully updated.")
+            with resources.files(package_name).joinpath(yaml_file_path).open("w") as f:
+                yaml.dump(data, f, default_flow_style=False)
+            print(f"Configuration root path successfully updated.")
 
-    except FileNotFoundError:
-        print(
-            f"Error: YAML file '{yaml_file_path}' not found in package '{package_name}'."
-        )
-    except yaml.YAMLError as e:
-        print(f"Error parsing YAML file: {e}")
+        except FileNotFoundError:
+            print(
+                f"Error: YAML file '{yaml_file_path}' not found in package '{package_name}'."
+            )
+        except yaml.YAMLError as e:
+            print(f"Error parsing YAML file: {e}")
 
 
 def confirm_root_path():

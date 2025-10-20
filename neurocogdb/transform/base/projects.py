@@ -10,23 +10,23 @@ def build_projects(config, df_programs, program_lookup):
 
     rows = []
     for f in yaml_files:
-        data = load_yaml(f)
+        metadata = load_yaml(f)
         # if not template
-        if not data["project_name"] == "Project Name" and not data.get("start_date") == "YYYY-MM-DD":
-            start_date = pd.to_datetime(data.get("start_date")).date()
+        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            start_date = pd.to_datetime(metadata.get("start_date")).date()
             # check for valid end date
-            if data.get("end_date") == "YYYY-MM-DD":
+            if metadata.get("end_date") == "YYYY-MM-DD":
                 end_date = start_date + pd.DateOffset(years=1)
             else:
-                end_date = pd.to_datetime(data.get("end_date")).date()
+                end_date = pd.to_datetime(metadata.get("end_date")).date()
 
             # check for valid program
             # handle erroneous members
-            if not data["program"] in program_lookup.keys():
+            if not metadata.get("program") in program_lookup.keys():
                 df = pd.DataFrame(
                     {
                         "id": [str(uuid.uuid4())],
-                        "name": [data["program"]],
+                        "name": [metadata.get("program")],
                         "start_date": [start_date],
                         "end_date": [end_date],
                         "source_path": [""],
@@ -38,12 +38,12 @@ def build_projects(config, df_programs, program_lookup):
             rows.append(
                 {
                     "id": str(uuid.uuid4()),
-                    "name": data["project_name"],
-                    "ethics": data.get("ethics"),
+                    "name": metadata.get("project_name"),
+                    "ethics": metadata.get("ethics"),
                     "start_date": start_date,
                     "end_date": end_date,
-                    "data_path": data.get("data_path"),
-                    "program_id": program_lookup[data["program"]],
+                    "data_path": metadata.get("data_path"),
+                    "program_id": program_lookup[metadata["program"]],
                     "source_path": str(f),
                 }
             )

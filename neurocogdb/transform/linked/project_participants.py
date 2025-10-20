@@ -10,14 +10,15 @@ def build_project_participants(config, project_lookup):
     rows = []
     for f in yaml_files:
         metadata = load_yaml(f)
-        pid = project_lookup[metadata["project_name"]]
-        for group in metadata.get("participants", [])["groups"]:
-            rows.append(
-                {
-                    "id": str(uuid.uuid4()),
-                    "project_id": pid,
-                    **group
-                }
-            )
+        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+            pid = project_lookup[metadata.get("project_name")]
+            for group in metadata.get("participants", [])["groups"]:
+                rows.append(
+                    {
+                        "id": str(uuid.uuid4()),
+                        "project_id": pid,
+                        **group
+                    }
+                )
     
     return pd.DataFrame(rows)

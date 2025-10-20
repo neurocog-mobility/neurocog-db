@@ -12,7 +12,7 @@ def make_project_card(row):
     outputs = row["outputs"] or "[]"
     members = row["members"] or "[]"
 
-    # Build participant bar chart
+    # Build participant table
     if participants:
         dfp = pd.DataFrame(participants)
         dfp.loc[len(dfp)] = {
@@ -36,11 +36,15 @@ def make_project_card(row):
 
     # Program label
     program_label = [
-        program["name"] + " ✅" if not program["source"] == "" else program["name"]
+        (
+            program["name"] + " ✅"
+            if not program["source"] == ""
+            else program["name"] + " ❗"
+        )
         for program in row["program"]
     ]
     # Funding label
-    funding_label = [funder["organization"] for funder in row["funding"]]
+    funding_label = [funder["organization"] if funder["organization"] else "NA" for funder in row["funding"]]
 
     return dbc.Card(
         [
@@ -77,31 +81,7 @@ def make_project_card(row):
                                             html.Summary("Outputs"),
                                             html.Ul(
                                                 [
-                                                    html.Li(
-                                                        [
-                                                            html.Span(
-                                                                f" {o['name']}",
-                                                                style={
-                                                                    "color": "#fff",
-                                                                },
-                                                            ),
-                                                            html.Span(
-                                                                f" ({o['type']})",
-                                                                style={
-                                                                    "font-style": "italic",
-                                                                    "color": "#777",
-                                                                },
-                                                            ),
-                                                            (
-                                                                html.Span(
-                                                                    f": {o['date']}",
-                                                                    style={
-                                                                        "color": "#999"
-                                                                    },
-                                                                )
-                                                            ),
-                                                        ]
-                                                    )
+                                                    html.Li(format_output(o))
                                                     for o in outputs
                                                 ]
                                             ),
@@ -125,12 +105,9 @@ def make_project_card(row):
                                                             (
                                                                 html.Span(
                                                                     " ✅",
-                                                                    style={
-                                                                        "color": "lightgreen"
-                                                                    },
                                                                 )
                                                                 if m["valid"]
-                                                                else None
+                                                                else " ❗"
                                                             ),
                                                         ]
                                                     )
@@ -194,3 +171,49 @@ def make_participant_bar(project):
         margin=dict(l=0, r=0, t=0, b=0), xaxis_visible=False, yaxis_visible=False
     )
     return fig
+
+
+def format_output(o):
+    if o["url"]=="":
+        return [
+            html.Span(
+                f" {o['name']}",
+                style={
+                    "color": "#fff",
+                },
+            ),
+            html.Span(
+                f" ({o['type']})",
+                style={
+                    "font-style": "italic",
+                    "color": "#777",
+                },
+            ),
+            (
+                html.Span(
+                    f": {o['date']}",
+                    style={"color": "#999"},
+                )
+            ),
+        ]
+    else:
+        return [
+            html.A(
+                f" {o['name']}",
+                href=o["url"],
+                target="_blank",
+            ),
+            html.Span(
+                f" ({o['type']})",
+                style={
+                    "font-style": "italic",
+                    "color": "#777",
+                },
+            ),
+            (
+                html.Span(
+                    f": {o['date']}",
+                    style={"color": "#999"},
+                )
+            ),
+        ]

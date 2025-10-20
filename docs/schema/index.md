@@ -2,7 +2,7 @@
 
 The catalog is built upon 3 files distributed through the NeuroCog drive:
 
-- [program_info.yaml](programs.md): One for each program in the *programs* subfolder
+- [program_info.yaml](programs.md): One for each program in the *lab-administration/Programs* subfolder
 - [project_info.yaml](projects.md): One for each project in the *projects* subfolder
 - [members_info.yaml](members.md): A single file in the *people* subfolder
 
