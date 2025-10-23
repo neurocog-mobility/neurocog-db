@@ -19,8 +19,6 @@ filter_sidebar = dbc.Card(
                         "program",
                         "project",
                         "member",
-                        "collaborator",
-                        "funding",
                     ],
                     inline=False,
                     switch=True,

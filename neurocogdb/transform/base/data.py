@@ -17,8 +17,8 @@ def build_data(config):
         ):
             project_sources = metadata.get("data_sources", [])
 
-        for src in project_sources:
-            sources.add(tuple(sorted(src.items())))
+            for src in project_sources:
+                sources.add(tuple(sorted(src.items())))
 
     dict_sources = [dict(s) for s in sources]
     df = pd.DataFrame(

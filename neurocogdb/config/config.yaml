@@ -1,4 +1,4 @@
-rootpath: /home
+rootpath: /run/user/1000/gvfs/smb-share:server=ahsfile.uwaterloo.ca,share=neurocog$
 sources:
   collaborators:
     source:

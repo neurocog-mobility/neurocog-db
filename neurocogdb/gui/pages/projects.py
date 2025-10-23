@@ -49,6 +49,7 @@ def update_projects(
 
     # Participants
     all_participants = [p["label"] for lst in df["participant_groups"] for p in lst]
+    # print(all_participants)
     participant_opts = sorted(set(all_participants))
 
     # Data modalities

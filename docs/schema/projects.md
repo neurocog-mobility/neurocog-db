@@ -7,15 +7,16 @@ end_date: YYYY-MM-DD
 data_path: "./XX_Data/"
 program: Program Name
 members:
-  - First Member
+  - Member Name
   - ...
 location:
-  - name: NC Lab, CCCare, Manulife Center, ...
+  - name: NC Lab, ...
 participants:
   groups:
     - label: Group Label
-      n: integer
-      attributes: ["Healthy", "Control", "PD", "Freezer", "Non-freezer", ...]
+      total: 0
+      collected: 0
+      attributes: ["attribute one", "attribute two", ...]
 data_sources:
   - category: motion
     modality: imu, gait-carpet, mocap
@@ -27,7 +28,7 @@ data_sources:
     modality: func, anat, dwi, nirs, eeg
     device: NIRx, ...
   - category: clinic
-    modality: questionnaire
+    modality: clinometrics, demographics
     device: FoG-Q, PDQ, UPDRS, ...
   - category: misc
     modality: beh, video
@@ -36,6 +37,7 @@ outputs:
   - name: Output Title
     type: Publication, Pre-print, Conference poster, Conference presentation, ...
     url: https://doi.org/
+    date: YYYY-MM-DD
   - ...
 ```
 

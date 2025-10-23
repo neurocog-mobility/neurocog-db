@@ -9,8 +9,9 @@ def build_project_outputs(config, project_lookup, output_lookup):
 
     rows = []
     for f in yaml_files:
+        print(f)
         metadata = load_yaml(f)
-        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD":
+        if not metadata.get("project_name") == "Project Name" and not metadata.get("start_date") == "YYYY-MM-DD" and metadata.get("outputs", []):
             pid = project_lookup[metadata.get("project_name")]
             for output in metadata.get("outputs", []):
                 try:

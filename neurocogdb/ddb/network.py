@@ -19,9 +19,9 @@ def load_network_elements():
     funding = con.execute("SELECT id, organization FROM funding").fetchall()
 
     # Fetch relationships
-    # program_members = con.execute(
-    #     "SELECT program_id, member_id FROM program_members"
-    # ).fetchall()
+    program_members = con.execute(
+        "SELECT program_id, member_id FROM program_members"
+    ).fetchall()
     program_collabs = con.execute(
         "SELECT program_id, collaborator_id FROM program_collaborators"
     ).fetchall()
@@ -95,18 +95,6 @@ def load_network_elements():
             {"data": {"id": f"funding_{fid}", "label": label, "type": "funding"}}
         )
 
-    # # Program ↔ Members
-    # for prog_id, mem_id in program_members:
-    #     edges.append(
-    #         {
-    #             "data": {
-    #                 "source": f"program_{prog_id}",
-    #                 "target": f"member_{mem_id}",
-    #                 "label": "has member",
-    #             }
-    #         }
-    #     )
-
     # Program ↔ Collaborators
     for prog_id, collab_id in program_collabs:
         edges.append(
@@ -143,7 +131,41 @@ def load_network_elements():
             }
         )
 
+    # Program ↔ Members
+    for prog_id, mem_id in program_members:
+        keep_edge = True
+        for proj_id, _, _, _, _ in projects:
+            test_edge = {
+                "data": {
+                    "source": f"member_{mem_id}",
+                    "target": f"project_{proj_id}",
+                    "label": "works on",
+                }
+            }
+            test_edge_proj = {
+                "data": {
+                    "source": f"program_{prog_id}",
+                    "target": f"project_{proj_id}",
+                    "label": "includes",
+                }
+            }
+            if test_edge in edges and test_edge_proj in edges:
+                keep_edge = False
+        if keep_edge:
+            edges.append(
+                {
+                    "data": {
+                        "source": f"program_{prog_id}",
+                        "target": f"member_{mem_id}",
+                        "label": "has member",
+                    }
+                }
+            )
+
     con.close()
+
+    # print(edges[0])
+    # print({'data': {'source': 'program_ae83c681-62b0-4cfe-840f-d23e6de0dd1c', 'target': 'project_0d9db150-89f2-49b2-beda-4a99441531d7', 'label': 'includes'}} in edges)
 
     # add edge ids
     for i, e in enumerate(edges):
